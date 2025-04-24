@@ -38,9 +38,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       fs.writeFileSync(boletosPath, JSON.stringify(actualizados, null, 2));
 
       console.log(`✅ Boleto generado para ${payer}:`, nuevos);
+      return res.status(200).json({ received: true, boletos: nuevos }); // ✅ MOVIDO AQUÍ
     }
 
-    res.status(200).json({ received: true, boletos: nuevos });
+    res.status(200).json({ received: true }); // ✅ Respuesta general si no es evento de interés 23
   } catch (err: any) {
     console.error('❌ Error en webhook PayPal:', err.message);
     res.status(500).json({ error: err.message });
