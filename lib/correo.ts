@@ -9,7 +9,7 @@ export async function enviarCorreo(destinatario: string, boletos: number[]) {
     },
   });
 
-  const texto = \`Gracias por tu compra. Tus boletos son:\n\n\${boletos.map(n => '#' + n.toString().padStart(5, '0')).join(', ')}\`;
+  const texto = `Gracias por tu compra. Tus boletos son:\n\n${boletos.map(n => '#' + n.toString().padStart(5, '0')).join(', ')}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
